@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lame — TPF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
+        
+        :root {
+            --accent: #ffffff;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--accent);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), 
+                        url('https://i.pinimg.com/736x/c0/3d/b8/c03db8b8e8f17a8698d9e08b2c1ffdb6.jpg') center/cover no-repeat fixed;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 6.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.2rem;
+            text-shadow: 0 0 60px rgba(0,0,0,0.8);
+        }
+        
+        .artist {
+            font-size: 2rem;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 3.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .timer-unit {
+            min-width: 130px;
+        }
+        
+        .timer-number {
+            font-size: 5.2rem;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(255,255,255,0.4);
+        }
+        
+        .timer-label {
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+            margin-top: 0.6rem;
+        }
+        
+        .badlink {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin: 2.5rem 0;
+            padding: 18px 52px;
+            background: #ffffff;
+            color: #000;
+            font-weight: 700;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .badlink:hover {
+            transform: scale(1.08);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+        
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin: 4.5rem 0 5rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 16px 32px;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            border-radius: 9999px;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: white;
+            transform: translateY(-4px);
+        }
+        
+        .social-link i {
+            font-size: 1.4rem;
+        }
+        
+        footer {
+            opacity: 0.7;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .title { font-size: 4.2rem; }
+            .artist { font-size: 1.6rem; }
+            .timer-number { font-size: 3.6rem; }
+            .subtitle { font-size: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">LAME</h1>
+        <p class="artist">TPF</p>
+        
+        <p class="subtitle">Новая песня выходит 14 июня 2026</p>
+        
+        <div class="countdown" id="countdown">
+            <div class="timer-unit"><div class="timer-number" id="days">00</div><div class="timer-label">Дней</div></div>
+            <div class="timer-unit"><div class="timer-number" id="hours">00</div><div class="timer-label">Часов</div></div>
+            <div class="timer-unit"><div class="timer-number" id="minutes">00</div><div class="timer-label">Минут</div></div>
+            <div class="timer-unit"><div class="timer-number" id="seconds">00</div><div class="timer-label">Секунд</div></div>
+        </div>
+        
+        <a href="https://band.link/14lame" target="_blank" class="badlink">
+            <i class="fa-solid fa-music"></i>
+            СЛУШАТЬ НА ВСЕХ ПЛОЩАДКАХ
+        </a>
+        
+        <div class="links">
+            <a href="https://vk.com/tpf_m" target="_blank" class="social-link">
+                <i class="fab fa-vk"></i> ВКонтакте
+            </a>
+            <a href="https://t.me/TPF_Music" target="_blank" class="social-link">
+                <i class="fab fa-telegram-plane"></i> Telegram
+            </a>
+            <a href="https://soundcloud.com/tpf_music" target="_blank" class="social-link">
+                <i class="fab fa-soundcloud"></i> SoundCloud
+            </a>
+        </div>
+        
+        <footer>© 2026 TPF • LAME</footer>
+    </div>
+
+    <script>
+        function startCountdown() {
+            const target = new Date('2026-06-14T00:00:00').getTime();
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = target - now;
+                
+                if (distance < 0) {
+                    document.getElementById('countdown').innerHTML = `<div style="font-size:3rem; color:#fff;">Песня уже вышла! 🔥</div>`;
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000*60*60*24));
+                const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+                const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+                const seconds = Math.floor((distance % (1000*60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }, 1000);
+        }
+        
+        window.onload = startCountdown;
+    </script>
+</body>
+</html>
